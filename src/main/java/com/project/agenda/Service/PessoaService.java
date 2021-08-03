@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.project.agenda.Model.Pessoa;
 import com.project.agenda.Repository.PessoaRepository;
@@ -34,7 +35,27 @@ public class PessoaService {
 	public ResponseEntity<Pessoa> SavingPeople(Pessoa pessoa) {
 		Pessoa save = pessoaRepository.save(pessoa);
 		return ResponseEntity.status(HttpStatus.CREATED).body((save));
-
+	}
+	
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void DeletingPeople(Long id) {
+		pessoaRepository.deleteById(id);
+		
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
