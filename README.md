@@ -1,4 +1,4 @@
-# Foobar
+# API Agenda
 
 API feita em java Springboot um projeto para lidar com a pluralização de informações de uma agenda.
 
