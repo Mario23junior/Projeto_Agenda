@@ -15,8 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-   
-    
+  
 	private final String PACKAGE_BUILD = "com.project.agenda";
 	private final String TITLE_API = "Api de agenda de pessoas";
 	private final String DESCRITION = "api de gerenciamento de pessoas";
