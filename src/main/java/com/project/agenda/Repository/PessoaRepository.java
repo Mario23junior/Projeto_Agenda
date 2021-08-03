@@ -7,4 +7,7 @@ import com.project.agenda.Model.Pessoa;
 public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
     
 	Pessoa findByEmail(String email);
+	Pessoa findByIdade(Integer idade);
+
+	
 }

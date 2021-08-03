@@ -12,7 +12,7 @@ import com.project.agenda.Exception.DuplicateBusinessRule;
 
 @RestControllerAdvice
 public class ControllerAdviceErros {
-  
+  	
 	@ExceptionHandler(DuplicateBusinessRule.class)
  	public ErroResponse NotValueDuplicate(DuplicateBusinessRule ex, WebRequest request) {
 		 ErroResponse message = new ErroResponse(

@@ -62,8 +62,7 @@ public class PessoaService {
 		 if(findPerson != null && findPerson.getEmail() != pessoa.getEmail()) {
 			 throw new DuplicateBusinessRule(String.format("O Cliente %s ja está cadastrado",pessoa.getNome()));
 		 }
-	 }
-	
+	 }	
 }
 
 
