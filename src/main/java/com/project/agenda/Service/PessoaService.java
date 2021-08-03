@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.project.agenda.Model.Pessoa;
 import com.project.agenda.Repository.PessoaRepository;
@@ -39,22 +40,20 @@ public class PessoaService {
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void DeletingPeople(Long id) {
-		pessoaRepository.deleteById(id);
-		
+		pessoaRepository.deleteById(id);	
 	}
 	
+	 public void UpdatingPeople(Long id, Pessoa pessoa) {
+		 pessoaRepository
+		                .findById(id)
+		                .map(updatePessoa -> {
+		                	pessoa.setId(updatePessoa.getId());
+		                	pessoaRepository.save(pessoa);
+		                	return updatePessoa;
+		                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT,"Nenhuma informação encontrada para ser deletada"));
+	 }
+	
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
