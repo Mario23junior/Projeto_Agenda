@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,11 @@ public class PessoaController {
 	@PostMapping
 	public ResponseEntity<Pessoa> savePerson(@Valid @RequestBody Pessoa pessoa) {
 		return pessoaService.SavingPeople(pessoa);
+	}
+	
+	@DeleteMapping("/{id}")
+	public void deletePerson(@PathVariable Long id) {
+		pessoaService.DeletingPeople(id);
 	}
 }
 
