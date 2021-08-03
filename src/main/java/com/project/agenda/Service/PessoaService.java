@@ -1,7 +1,9 @@
 package com.project.agenda.Service;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.project.agenda.Model.Pessoa;
@@ -19,6 +21,13 @@ public class PessoaService {
 	public List<Pessoa> listAllData() {
 		List<Pessoa> listAll = pessoaRepository.findAll();
 		return listAll;
+	}
+	
+	public ResponseEntity<Pessoa> PeopleById(Long id) {
+		Optional<Pessoa> listId = pessoaRepository.findById(id);
+		return listId.isPresent() 
+				? ResponseEntity.ok(listId.get()) 
+				: ResponseEntity.notFound().build();
 	}
 	
 }
