@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.project.agenda.Exception.DuplicateBusinessRule;
 import com.project.agenda.Model.Pessoa;
 import com.project.agenda.Repository.PessoaRepository;
 
@@ -34,6 +35,7 @@ public class PessoaService {
 	}
 	
 	public ResponseEntity<Pessoa> SavingPeople(Pessoa pessoa) {
+		ValidateDuplicateData(pessoa);
 		Pessoa save = pessoaRepository.save(pessoa);
 		return ResponseEntity.status(HttpStatus.CREATED).body((save));
 	}
@@ -48,9 +50,18 @@ public class PessoaService {
 		                .findById(id)
 		                .map(updatePessoa -> {
 		                	pessoa.setId(updatePessoa.getId());
-		                	pessoaRepository.save(pessoa);
+		                	ValidateDuplicateData(pessoa);
+  		                	pessoaRepository.save(pessoa);
 		                	return updatePessoa;
 		                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT,"Nenhuma informação encontrada para ser deletada"));
+	 }
+	 
+	 
+	 public void ValidateDuplicateData(Pessoa pessoa) {
+		 Pessoa findPerson = pessoaRepository.findByEmail(pessoa.getEmail());
+		 if(findPerson != null && findPerson.getEmail() != pessoa.getEmail()) {
+			 throw new DuplicateBusinessRule(String.format("O Cliente %s ja está cadastrado",pessoa.getNome()));
+		 }
 	 }
 	
 }
