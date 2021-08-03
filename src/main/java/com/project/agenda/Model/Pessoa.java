@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.sun.istack.NotNull;
 
@@ -17,12 +20,18 @@ public class Pessoa {
 	private Long id;
 	
 	@NotNull
+	@NotBlank(message = "nome")
+	@Length(min = 3, max = 200, message = "Nome")
 	private String nome;
 	
 	@NotNull
+	@Length(min = 18, max = 100, message = "idade")
+	@NotBlank(message = "idade")
 	private Integer idade;
 	
 	@NotNull
+	@Length(min = 3, max = 50, message = "email")
+	@NotBlank(message = "email")
 	private String email;
 
 	public Long getId() {
