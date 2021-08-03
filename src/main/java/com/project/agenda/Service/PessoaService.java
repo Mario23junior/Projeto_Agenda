@@ -3,6 +3,7 @@ package com.project.agenda.Service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,12 @@ public class PessoaService {
 		return listId.isPresent() 
 				? ResponseEntity.ok(listId.get()) 
 				: ResponseEntity.notFound().build();
+	}
+	
+	public ResponseEntity<Pessoa> SavingPeople(Pessoa pessoa) {
+		Pessoa save = pessoaRepository.save(pessoa);
+		return ResponseEntity.status(HttpStatus.CREATED).body((save));
+
 	}
 	
 }

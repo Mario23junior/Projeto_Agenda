@@ -5,7 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -25,11 +28,12 @@ public class Pessoa {
 	private String nome;
 	
 	@NotNull
-	@Length(min = 18, max = 100, message = "idade")
-	@NotBlank(message = "idade")
-	private Integer idade;
+    @Min(value = 18)
+	@Max(value = 200)
+  	private Integer idade;
 	
 	@NotNull
+    @NotEmpty
 	@Length(min = 3, max = 50, message = "email")
 	@NotBlank(message = "email")
 	private String email;
